@@ -372,7 +372,7 @@ impl Drop for OrtStatusWrapper {
 	}
 }
 
-pub(crate) fn status_to_result(status: *mut ort_sys::OrtStatus) -> Result<(), ErrorInternal> {
+pub fn status_to_result(status: *mut ort_sys::OrtStatus) -> Result<(), ErrorInternal> {
 	let status_wrapper: OrtStatusWrapper = status.into();
 	status_wrapper.into()
 }

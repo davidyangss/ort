@@ -40,6 +40,7 @@ pub fn training_api() -> Result<NonNull<ort_sys::OrtTrainingApi>> {
 	.ok_or(Error::TrainingNotEnabled)
 }
 
+#[macro_export]
 macro_rules! trainsys {
 	($method:ident) => {
 		$crate::training_api().unwrap().as_ref().$method.unwrap_or_else(|| unreachable!(concat!("Method `", stringify!($method), "` is null")))

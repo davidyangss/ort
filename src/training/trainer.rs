@@ -23,6 +23,12 @@ pub struct Trainer {
 }
 
 impl Trainer {
+	pub fn ort_training_session_ptr(&self) -> NonNull<ort_sys::OrtTrainingSession>{
+		self.ptr
+	}
+	pub fn train_output_names(&self) -> &[String] {
+		&self.train_output_names
+	}
 	pub fn new(
 		session_options: SessionBuilder,
 		allocator: Allocator,

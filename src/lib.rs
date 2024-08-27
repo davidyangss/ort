@@ -15,7 +15,7 @@
 compile_error!("`cargo test --features fetch-models`!!1!");
 
 pub(crate) mod environment;
-pub(crate) mod error;
+pub mod error;
 pub(crate) mod execution_providers;
 pub(crate) mod io_binding;
 pub(crate) mod memory;
@@ -265,7 +265,7 @@ macro_rules! ortsys {
 
 pub(crate) use ortsys;
 
-pub(crate) fn char_p_to_string(raw: *const c_char) -> Result<String> {
+pub fn char_p_to_string(raw: *const c_char) -> Result<String> {
 	let c_string = unsafe { CStr::from_ptr(raw.cast_mut()).to_owned() };
 	match c_string.into_string() {
 		Ok(string) => Ok(string),

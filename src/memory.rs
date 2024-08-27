@@ -63,7 +63,7 @@ use crate::{
 /// ```
 #[derive(Debug)]
 pub struct Allocator {
-	pub(crate) ptr: NonNull<ort_sys::OrtAllocator>,
+	pub ptr: NonNull<ort_sys::OrtAllocator>,
 	/// The 'default' CPU allocator, provided by `GetAllocatorWithDefaultOptions` and implemented by
 	/// [`Allocator::default`], should **not** be released, so this field marks whether or not we should call
 	/// `ReleaseAllocator` on drop.
@@ -86,7 +86,7 @@ impl Allocator {
 	}
 
 	/// Frees an object allocated by this allocator, given the object's C pointer.
-	pub(crate) unsafe fn free<T>(&self, ptr: *mut T) {
+	pub unsafe fn free<T>(&self, ptr: *mut T) {
 		self.ptr.as_ref().Free.unwrap_or_else(|| unreachable!("Allocator method `Free` is null"))(self.ptr.as_ptr(), ptr.cast());
 	}
 
